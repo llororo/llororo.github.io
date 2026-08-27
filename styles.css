@@ -378,15 +378,11 @@ cite {
   display: flex;
   flex-direction: column;
   padding: 26px;
-  background:
-    linear-gradient(135deg, transparent 48.5%, var(--black) 49%, var(--black) 51%, transparent 51.5%),
-    var(--bg);
+  background: var(--bg);
 }
 
 [data-mode="calm"] .project-card {
-  background:
-    linear-gradient(135deg, transparent 48.5%, var(--black) 49%, var(--black) 51%, transparent 51.5%),
-    var(--fluor);
+  background: var(--fluor);
 }
 
 .project-card h3 {
