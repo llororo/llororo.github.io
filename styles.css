@@ -394,8 +394,35 @@ cite {
   overflow-wrap: anywhere;
 }
 
-.project-card > p:not(.card-label) {
-  margin: 12px 0 40px;
+.project-details {
+  display: grid;
+  gap: 14px;
+  margin: 22px 0 12px;
+  padding-top: 16px;
+  border-top: 2px solid currentColor;
+}
+
+.project-details div {
+  display: grid;
+  gap: 5px;
+}
+
+.project-details dt {
+  font: 900 10px/1 var(--mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.project-details dd {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.project-role {
+  margin: 0 0 26px;
   font-weight: 800;
 }
 
@@ -406,6 +433,10 @@ cite {
   background: var(--black);
   font: 900 11px/1 var(--mono);
   text-decoration: none;
+}
+
+.didactics-break {
+  display: none;
 }
 
 .topic-grid {
@@ -562,9 +593,14 @@ cite {
 .outreach-date {
   display: flex;
   justify-content: space-between;
+  gap: 14px;
   padding-bottom: 13px;
   border-bottom: 2px solid currentColor;
   font: 900 11px/1 var(--mono);
+}
+
+.outreach-date span {
+  text-align: right;
 }
 
 .outreach-card h3 {
@@ -708,7 +744,7 @@ cite {
 .site-footer {
   min-height: 110px;
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 24px;
   padding: 20px var(--page-x);
@@ -760,6 +796,10 @@ cite {
 
   .project-card {
     min-height: 340px;
+  }
+
+  .didactics-break {
+    display: inline;
   }
 
   .outreach-card:nth-child(1),
@@ -870,6 +910,21 @@ cite {
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .topic-grid li:nth-child(3) {
+    color: var(--fluor);
+    background: var(--black);
+  }
+
+  .topic-grid li:nth-child(4) {
+    color: var(--ink);
+    background: var(--bg);
+  }
+
+  [data-mode="calm"] .topic-grid li:nth-child(4) {
+    color: var(--black);
+    background: var(--fluor);
+  }
+
   .entry {
     grid-template-columns: 100px minmax(0, 1fr);
   }
@@ -907,9 +962,6 @@ cite {
     grid-template-columns: 1fr auto;
   }
 
-  .site-footer p:nth-child(2) {
-    display: none;
-  }
 }
 
 @media (max-width: 520px) {
@@ -936,7 +988,7 @@ cite {
 
   .section-heading h2,
   .contact h2 {
-    font-size: clamp(52px, 16.5vw, 85px);
+    font-size: clamp(52px, 16vw, 85px);
   }
 
   .thesis-card dl {
@@ -949,6 +1001,26 @@ cite {
 
   .topic-grid li {
     min-height: 90px;
+  }
+
+  .topic-grid li:nth-child(3) {
+    color: var(--ink);
+    background: var(--bg);
+  }
+
+  .topic-grid li:nth-child(4) {
+    color: var(--fluor);
+    background: var(--black);
+  }
+
+  [data-mode="calm"] .topic-grid li:nth-child(3) {
+    color: var(--black);
+    background: var(--fluor);
+  }
+
+  [data-mode="calm"] .topic-grid li:nth-child(4) {
+    color: var(--fluor);
+    background: var(--black);
   }
 
   .entry,

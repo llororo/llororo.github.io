@@ -54,24 +54,41 @@ const navLinks = [...document.querySelectorAll('.site-nav a[href^="#"]')];
 const sections = navLinks
   .map((link) => document.querySelector(link.getAttribute('href')))
   .filter(Boolean);
+const siteHeader = document.querySelector('.site-header');
 
-if ('IntersectionObserver' in window) {
-  const sectionObserver = new IntersectionObserver((entries) => {
-    const visible = entries
-      .filter((entry) => entry.isIntersecting)
-      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+const updateActiveNav = () => {
+  const headerHeight = siteHeader?.offsetHeight ?? 0;
+  const marker = headerHeight + Math.min(window.innerHeight * 0.22, 170);
+  let activeSection = null;
 
-    if (!visible) return;
-
-    navLinks.forEach((link) => {
-      const current = link.getAttribute('href') === `#${visible.target.id}`;
-      if (current) link.setAttribute('aria-current', 'true');
-      else link.removeAttribute('aria-current');
-    });
-  }, {
-    threshold: [0.18, 0.35, 0.6],
-    rootMargin: '-18% 0px -60%'
+  sections.forEach((section) => {
+    if (section.getBoundingClientRect().top <= marker) {
+      activeSection = section;
+    }
   });
 
-  sections.forEach((section) => sectionObserver.observe(section));
-}
+  const atPageEnd = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+  if (atPageEnd) activeSection = sections.at(-1) ?? activeSection;
+
+  navLinks.forEach((link) => {
+    const current = activeSection && link.getAttribute('href') === `#${activeSection.id}`;
+    if (current) link.setAttribute('aria-current', 'true');
+    else link.removeAttribute('aria-current');
+  });
+};
+
+let navUpdateQueued = false;
+const queueActiveNavUpdate = () => {
+  if (navUpdateQueued) return;
+  navUpdateQueued = true;
+
+  requestAnimationFrame(() => {
+    updateActiveNav();
+    navUpdateQueued = false;
+  });
+};
+
+window.addEventListener('scroll', queueActiveNavUpdate, { passive: true });
+window.addEventListener('resize', queueActiveNavUpdate);
+window.addEventListener('hashchange', queueActiveNavUpdate);
+queueActiveNavUpdate();
