@@ -82,9 +82,9 @@
     <main id="contido">
       <section class="hero" id="inicio" aria-labelledby="hero-title">
         <h1 id="hero-title">
-          <span>MIGUEL</span>
-          <span>GUISANTES</span>
-          <span>ALONSO</span>
+          <span class="hero-name" aria-label="MIGUEL"><span aria-hidden="true">MI</span><span class="hero-name-tail" aria-hidden="true">GUEL</span></span>
+          <span class="hero-name" aria-label="GUISANTES"><span aria-hidden="true">GUISAN</span><span class="hero-name-tail" aria-hidden="true">TES</span></span>
+          <span class="hero-name" aria-label="ALONSO"><span aria-hidden="true">ALON</span><span class="hero-name-tail" aria-hidden="true">SO</span></span>
         </h1>
 
         <div class="hero-footer">
@@ -101,6 +101,11 @@
           <span>SOCIOLINGÜÍSTICA / IDEOLOXÍAS LINGÜÍSTICAS / IDENTIDADE / MULTILINGÜISMO / LINGUAS MINORIZADAS / POLÍTICA LINGÜÍSTICA /</span>
         </div>
       </div>
+
+      <section class="bio-note" id="bionota" aria-labelledby="bio-title">
+        <h2 id="bio-title">BIONOTA</h2>
+        <p>Miguel Guisantes-Alonso é investigador en sociolingüística e doutorando en Lingüística na Universidade de Santiago de Compostela. Graduado en Lingua e Literatura Galegas, conta cun mestrado en Lingüística Aplicada e outro en formación do profesorado. A súa tese, dirixida por Elisa Fernández Rei, analiza a relación entre identidade, ideoloxías e prácticas lingüísticas na mocidade galega nun contexto global multilingüe. A súa traxectoria abrangue a investigación predoutoral no <a href="https://ilg.usc.gal/gl" target="_blank" rel="noreferrer">Instituto da Lingua Galega</a>, a normalización lingüística e a docencia de lingua e cultura galegas no <a href="https://www.hcias.uni-heidelberg.de/en" target="_blank" rel="noreferrer">CEG (HCIAS)</a> da Universität Heidelberg. Os seus intereses inclúen as linguas minorizadas, o multilingüismo e a política lingüística.</p>
+      </section>
 
       <section class="section work" id="traballo" aria-labelledby="work-title">
         <header class="section-heading reveal">
@@ -254,10 +259,17 @@
           </article>
 
           <article class="outreach-card reveal">
-            <div class="outreach-date"><time datetime="2026-05-04">04.05.2026</time><span>MOKO</span></div>
+            <div class="outreach-date"><time datetime="2026-05-04">04.05.2026</time><span>Universität Heidelberg</span></div>
             <h3 lang="de"><cite>Galizien: Sprache, Kultur und Wandel in einer europäischen Randregion</cite></h3>
             <p lang="de">Montagskonferenz, IÜD, Universität Heidelberg.</p>
             <a href="https://backend.uni-heidelberg.de/de/dokumente/montagskonferenz-regionen-geographische-politische-und-kulturelle-raeume/download" target="_blank" rel="noreferrer">VER PROGRAMA ↗</a>
+          </article>
+
+          <article class="outreach-card reveal">
+            <div class="outreach-date"><time datetime="2025-01-06">06.01.2025</time><span>The Conversation</span></div>
+            <h3 lang="es"><cite>Galicia sin gallego: ¿un abandono colectivo?</cite></h3>
+            <p>Con Estela Fidalgo-Garra.</p>
+            <a href="https://doi.org/10.64628/AAO.syweahdqn" target="_blank" rel="noreferrer">DOI ↗</a>
           </article>
 
           <article class="outreach-card reveal">
@@ -278,7 +290,11 @@
         <div class="email-box reveal">
           <p class="card-label">EMAIL</p>
           <h3>CONTACTA COMIGO</h3>
-          <a class="email-link" href="mailto:ola@mig.mozmail.com">ola@mig.mozmail.com <span aria-hidden="true">↗</span></a>
+          <button class="email-link" type="button" data-email-action aria-label="Abrir o programa de correo para contactar con Miguel Guisantes-Alonso">
+            <span class="email-address-visual" aria-hidden="true"></span>
+            <span aria-hidden="true">↗</span>
+          </button>
+          <noscript><p class="email-noscript">Activa JavaScript para usar o contacto por correo.</p></noscript>
         </div>
 
         <nav class="profile-links reveal" aria-label="Perfís académicos e sociais">

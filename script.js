@@ -18,6 +18,18 @@ if (year) {
   year.textContent = new Date().getFullYear();
 }
 
+const emailAction = document.querySelector('[data-email-action]');
+
+if (emailAction) {
+  emailAction.addEventListener('click', () => {
+    const contactCodes = [
+      109, 97, 105, 108, 116, 111, 58,
+      111, 108, 97, 64, 109, 105, 103, 46, 109, 111, 122, 109, 97, 105, 108, 46, 99, 111, 109
+    ];
+    window.location.href = String.fromCharCode(...contactCodes);
+  });
+}
+
 modeButton.addEventListener('click', () => {
   root.dataset.mode = root.dataset.mode === 'calm' ? 'fluor' : 'calm';
 
