@@ -1114,7 +1114,7 @@ cite {
 
   .section-heading h2,
   .contact h2 {
-    font-size: clamp(42px, 13.5vw, 72px);
+    font-size: clamp(42px, 12vw, 72px);
   }
 
   .thesis-card dl {
