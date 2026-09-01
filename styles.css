@@ -189,10 +189,16 @@ cite {
   display: block;
 }
 
-.hero h1 > span:nth-child(2) {
-  padding-left: 7vw;
+.hero h1 > span:nth-child(1),
+.hero h1 > span:nth-child(3) {
   -webkit-text-stroke: 3px var(--ink);
   color: transparent;
+}
+
+.hero h1 > span:nth-child(2) {
+  padding-left: 7vw;
+  -webkit-text-stroke: 0;
+  color: var(--ink);
 }
 
 .hero h1 > span:nth-child(3) {
@@ -633,7 +639,7 @@ cite {
 }
 
 .outreach-card:nth-child(4) {
-  grid-column: 4 / span 6;
+  grid-column: 1 / span 8;
 }
 
 [data-mode="calm"] .outreach-card:nth-child(1),
@@ -675,6 +681,18 @@ cite {
   border: 2px solid currentColor;
   font: 900 11px/1 var(--mono);
   text-decoration: none;
+}
+
+.outreach-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.outreach-links a {
+  margin-top: 0;
 }
 
 .outreach-card a:hover {
@@ -936,9 +954,13 @@ cite {
     line-height: 0.77;
   }
 
+  .hero h1 > span:nth-child(1),
+  .hero h1 > span:nth-child(3) {
+    -webkit-text-stroke-width: 2px;
+  }
+
   .hero h1 > span:nth-child(2) {
     padding-left: 0;
-    -webkit-text-stroke-width: 2px;
   }
 
   .hero h1 > span:nth-child(3) {
