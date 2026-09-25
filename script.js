@@ -3,6 +3,65 @@ const modeButton = document.querySelector('[data-mode-toggle]');
 const modeLabel = document.querySelector('[data-mode-label]');
 const themeColor = document.querySelector('meta[name="theme-color"]');
 const year = document.querySelector('[data-year]');
+const heroTitle = document.querySelector('#hero-title');
+const heroNames = heroTitle ? [...heroTitle.querySelectorAll('.hero-name')] : [];
+
+const fitHeroNames = () => {
+  if (!heroTitle || heroNames.length === 0) return;
+
+  const titleWidth = heroTitle.clientWidth;
+  const stacked = getComputedStyle(heroNames[0].firstElementChild).display === 'block';
+  const fillRatios = stacked ? [0.98, 0.995, 0.94] : [0.74, 0.96, 0.78];
+  const heightLimit = window.innerHeight * (stacked ? 0.17 : 0.255);
+  const widthFits = [];
+
+  heroNames.forEach((name, index) => {
+    const style = getComputedStyle(name);
+    const currentSize = Number.parseFloat(style.fontSize);
+    const paddingLeft = Number.parseFloat(style.paddingLeft) || 0;
+    const textWidths = [...name.children].map((part) => {
+      const range = document.createRange();
+      range.selectNodeContents(part);
+      return range.getBoundingClientRect().width;
+    });
+    const textWidth = stacked
+      ? Math.max(...textWidths)
+      : textWidths.reduce((total, width) => total + width, 0);
+
+    if (!currentSize || !textWidth) return;
+
+    const availableWidth = Math.max(titleWidth - paddingLeft - 2, 1);
+    widthFits.push(currentSize * ((availableWidth * fillRatios[index]) / textWidth));
+  });
+
+  if (widthFits.length !== heroNames.length) return;
+
+  const minimum = stacked ? 64 : 72;
+  const maximum = stacked ? 156 : 272;
+  const sharedSize = Math.min(Math.max(Math.min(...widthFits), minimum), heightLimit, maximum);
+
+  heroNames.forEach((name) => {
+    name.style.fontSize = `${sharedSize.toFixed(2)}px`;
+  });
+};
+
+let heroFitQueued = false;
+const queueHeroFit = () => {
+  if (heroFitQueued) return;
+  heroFitQueued = true;
+
+  requestAnimationFrame(() => {
+    fitHeroNames();
+    heroFitQueued = false;
+  });
+};
+
+queueHeroFit();
+window.addEventListener('resize', queueHeroFit, { passive: true });
+
+if (document.fonts?.ready) {
+  document.fonts.ready.then(queueHeroFit);
+}
 
 const updateMode = () => {
   const calm = root.dataset.mode === 'calm';
