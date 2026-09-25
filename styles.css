@@ -213,26 +213,39 @@ cite {
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: repeat(3, 1fr) auto;
-  align-items: end;
+  grid-template-columns: 1fr auto;
+  align-items: center;
   gap: 16px;
   border-top: var(--border) solid var(--line);
   padding-top: 14px;
   font: 900 11px/1.2 var(--mono);
 }
 
-.hero-footer p {
-  margin: 0;
-}
-
 .hero-footer a {
-  padding: 12px 14px;
-  color: var(--fluor);
-  background: var(--black);
+  color: var(--ink);
   text-decoration: none;
 }
 
-.hero-footer a:hover {
+.hero-orcid {
+  width: fit-content;
+}
+
+.hero-orcid:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.hero-orcid-short {
+  display: none;
+}
+
+.hero-work-link {
+  padding: 12px 14px;
+  color: var(--fluor);
+  background: var(--black);
+}
+
+.hero-work-link:hover {
   transform: translate(-3px, -3px);
   box-shadow: 5px 5px 0 #ff2bd6;
 }
@@ -981,11 +994,7 @@ cite {
     grid-template-columns: 1fr 1fr;
   }
 
-  .hero-footer p:nth-child(3) {
-    display: none;
-  }
-
-  .hero-footer a {
+  .hero-work-link {
     justify-self: end;
   }
 
@@ -1105,8 +1114,12 @@ cite {
     grid-template-columns: 1fr auto;
   }
 
-  .hero-footer p:nth-child(2) {
+  .hero-orcid-full {
     display: none;
+  }
+
+  .hero-orcid-short {
+    display: inline;
   }
 
   .bio-note {
