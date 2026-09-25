@@ -239,13 +239,13 @@ cite {
   display: none;
 }
 
-.hero-work-link {
+.hero-footer .hero-work-link {
   padding: 12px 14px;
   color: var(--fluor);
   background: var(--black);
 }
 
-.hero-work-link:hover {
+.hero-footer .hero-work-link:hover {
   transform: translate(-3px, -3px);
   box-shadow: 5px 5px 0 #ff2bd6;
 }
