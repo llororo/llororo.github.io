@@ -2,4 +2,6 @@
 
 Web persoal de Miguel Guisantes-Alonso, investigador en sociolingüística.
 
-Sitio estático en galego, optimizado para GitHub Pages, dispositivos móbiles, accesibilidade e buscadores.
+[llororo.github.io](https://llororo.github.io/)
+
+Áreas de traballo: ideoloxías lingüísticas, lingua e identidade, multilingüismo, linguas minorizadas e política lingüística.
