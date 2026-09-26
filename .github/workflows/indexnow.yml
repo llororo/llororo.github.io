@@ -1,0 +1,27 @@
+name: Notificar IndexNow
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - index.html
+      - styles.css
+      - script.js
+      - sitemap.xml
+      - manifest.webmanifest
+      - og.png
+      - .github/workflows/indexnow.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  notify-indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Enviar a portada a IndexNow
+        run: >-
+          curl --fail --silent --show-error --retry 3
+          "https://api.indexnow.org/indexnow?url=https%3A%2F%2Fllororo.github.io%2F&key=9c6f3d427a88e37a130e8cf983a40dae&keyLocation=https%3A%2F%2Fllororo.github.io%2F9c6f3d427a88e37a130e8cf983a40dae.txt"
