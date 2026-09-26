@@ -78,14 +78,48 @@ if (year) {
 }
 
 const emailAction = document.querySelector('[data-email-action]');
+const contactWorker = 'https://contacto-aleatorio.miguel-guisantes.workers.dev';
+
+const fallbackContact = () => {
+  const contactCodes = [
+    109, 97, 105, 108, 116, 111, 58,
+    111, 108, 97, 64, 109, 105, 103, 46, 109, 111, 122, 109, 97, 105, 108, 46, 99, 111, 109
+  ];
+
+  return String.fromCharCode(...contactCodes);
+};
 
 if (emailAction) {
-  emailAction.addEventListener('click', () => {
-    const contactCodes = [
-      109, 97, 105, 108, 116, 111, 58,
-      111, 108, 97, 64, 109, 105, 103, 46, 109, 111, 122, 109, 97, 105, 108, 46, 99, 111, 109
-    ];
-    window.location.href = String.fromCharCode(...contactCodes);
+  emailAction.addEventListener('click', async () => {
+    if (emailAction.getAttribute('aria-busy') === 'true') return;
+
+    emailAction.setAttribute('aria-busy', 'true');
+    emailAction.disabled = true;
+
+    try {
+      const response = await fetch(contactWorker, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        cache: 'no-store'
+      });
+
+      if (!response.ok) throw new Error('Non se puido obter unha máscara');
+
+      const { address } = await response.json();
+
+      if (!/^[a-z0-9]{12}@mig\.mozmail\.com$/.test(address)) {
+        throw new Error('Formato de máscara incorrecto');
+      }
+
+      window.location.href = `mailto:${address}`;
+    } catch (error) {
+      window.location.href = fallbackContact();
+    } finally {
+      window.setTimeout(() => {
+        emailAction.disabled = false;
+        emailAction.removeAttribute('aria-busy');
+      }, 600);
+    }
   });
 }
 
