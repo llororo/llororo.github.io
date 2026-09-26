@@ -538,39 +538,6 @@ cite {
   display: none;
 }
 
-.topic-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin: 70px 0 0;
-  padding: 0;
-  border-top: var(--border) solid var(--line);
-  border-left: var(--border) solid var(--line);
-  list-style: none;
-}
-
-.topic-grid li {
-  min-height: 118px;
-  display: flex;
-  align-items: end;
-  padding: 18px;
-  border-right: var(--border) solid var(--line);
-  border-bottom: var(--border) solid var(--line);
-  font-size: clamp(21px, 2.4vw, 38px);
-  font-weight: 950;
-  line-height: 0.95;
-  letter-spacing: -0.05em;
-}
-
-.topic-grid li:nth-child(even) {
-  color: var(--fluor);
-  background: var(--black);
-}
-
-[data-mode="calm"] .topic-grid li:nth-child(3n + 1) {
-  background: var(--fluor);
-  color: var(--black);
-}
-
 .publications {
   background:
     linear-gradient(90deg, transparent calc(50% - 1px), color-mix(in srgb, var(--ink) 18%, transparent) 50%, transparent calc(50% + 1px)),
@@ -1055,25 +1022,6 @@ cite {
     font-size: clamp(58px, 17vw, 112px);
   }
 
-  .topic-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .topic-grid li:nth-child(3) {
-    color: var(--fluor);
-    background: var(--black);
-  }
-
-  .topic-grid li:nth-child(4) {
-    color: var(--ink);
-    background: var(--bg);
-  }
-
-  [data-mode="calm"] .topic-grid li:nth-child(4) {
-    color: var(--black);
-    background: var(--fluor);
-  }
-
   .entry {
     grid-template-columns: 100px minmax(0, 1fr);
   }
@@ -1176,34 +1124,6 @@ cite {
 
   .thesis-card dl {
     grid-template-columns: 1fr;
-  }
-
-  .topic-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .topic-grid li {
-    min-height: 90px;
-  }
-
-  .topic-grid li:nth-child(3) {
-    color: var(--ink);
-    background: var(--bg);
-  }
-
-  .topic-grid li:nth-child(4) {
-    color: var(--fluor);
-    background: var(--black);
-  }
-
-  [data-mode="calm"] .topic-grid li:nth-child(3) {
-    color: var(--black);
-    background: var(--fluor);
-  }
-
-  [data-mode="calm"] .topic-grid li:nth-child(4) {
-    color: var(--fluor);
-    background: var(--black);
   }
 
   .entry,
