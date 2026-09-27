@@ -870,20 +870,21 @@ cite {
   background: var(--black);
 }
 
-.profile-links a.instapaper-latest {
+.profile-links a.instapaper-link {
   min-width: 0;
-  padding: 13px clamp(12px, 2vw, 24px);
-  color: var(--fluor);
-  background: var(--black);
 }
 
-.profile-links a.instapaper-latest > .instapaper-latest-copy {
+.profile-links a.instapaper-link > .instapaper-content {
   min-width: 0;
+}
+
+.instapaper-favorite {
+  display: flex;
+  flex-direction: column;
   gap: 5px;
-}
-
-.instapaper-latest small {
-  color: inherit;
+  min-width: 0;
+  padding-top: 10px;
+  border-top: 1px solid currentColor;
 }
 
 .instapaper-latest-title {
@@ -898,11 +899,9 @@ cite {
   white-space: normal;
 }
 
-.profile-links a.instapaper-latest:hover {
-  padding-right: clamp(12px, 2vw, 24px);
-  padding-left: clamp(18px, 2.6vw, 34px);
-  color: var(--black);
-  background: var(--fluor);
+.profile-links a.instapaper-link:hover {
+  padding-right: 0;
+  padding-left: 0;
 }
 
 [data-mode="calm"] .profile-links a:nth-child(odd) {
@@ -912,16 +911,6 @@ cite {
 [data-mode="calm"] .profile-links a:nth-child(odd):hover {
   color: var(--fluor);
   background: var(--black);
-}
-
-[data-mode="calm"] .profile-links a.instapaper-latest {
-  color: var(--fluor);
-  background: var(--black);
-}
-
-[data-mode="calm"] .profile-links a.instapaper-latest:hover {
-  color: var(--black);
-  background: var(--fluor);
 }
 
 .site-footer {

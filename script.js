@@ -79,6 +79,32 @@ if (year) {
 
 const emailAction = document.querySelector('[data-email-action]');
 const contactWorker = 'https://contacto-aleatorio.miguel-guisantes.workers.dev';
+const instapaperLink = document.querySelector('[data-instapaper-link]');
+const instapaperTitle = document.querySelector('[data-instapaper-title]');
+
+if (instapaperLink && instapaperTitle) {
+  fetch(`${contactWorker}/instapaper-latest`, {
+    headers: { Accept: 'application/json' },
+    cache: 'no-store'
+  })
+    .then((response) => {
+      if (!response.ok) throw new Error('Non se puido consultar Instapaper');
+      return response.json();
+    })
+    .then(({ title }) => {
+      if (typeof title !== 'string' || title.trim() === '') return;
+
+      const cleanTitle = title.trim();
+      instapaperTitle.textContent = cleanTitle;
+      instapaperLink.setAttribute(
+        'aria-label',
+        `Abrir o perfil público de Instapaper de Miguel. Último artigo que lle gustou: ${cleanTitle}`
+      );
+    })
+    .catch(() => {
+      // Mantense o último título comprobado incluído no HTML.
+    });
+}
 
 const citationCounters = [...document.querySelectorAll('[data-citation-doi]')];
 
