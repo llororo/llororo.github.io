@@ -80,6 +80,32 @@ if (year) {
 const emailAction = document.querySelector('[data-email-action]');
 const contactWorker = 'https://contacto-aleatorio.miguel-guisantes.workers.dev';
 
+const citationCounters = [...document.querySelectorAll('[data-citation-doi]')];
+
+const citationLabel = (count) => `${count} ${count === 1 ? 'CITA' : 'CITAS'}`;
+
+citationCounters.forEach(async (counter) => {
+  const doi = counter.dataset.citationDoi;
+  const countNode = counter.querySelector('[data-citation-count]');
+  if (!doi || !countNode) return;
+
+  try {
+    const response = await fetch(`https://api.openalex.org/works/https://doi.org/${doi}`, {
+      headers: { Accept: 'application/json' }
+    });
+
+    if (!response.ok) return;
+
+    const work = await response.json();
+    if (!Number.isInteger(work.cited_by_count) || work.cited_by_count < 0) return;
+
+    countNode.textContent = citationLabel(work.cited_by_count);
+    counter.dataset.citationStatus = 'live';
+  } catch (error) {
+    // Mantense a última cifra comprobada incluída no HTML.
+  }
+});
+
 const fallbackContact = () => {
   const contactCodes = [
     109, 97, 105, 108, 116, 111, 58,

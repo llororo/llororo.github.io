@@ -599,6 +599,38 @@ cite {
   background: var(--black);
 }
 
+.entry-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-self: end;
+  gap: 10px;
+}
+
+.entry-citations {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+  color: var(--ink);
+  font: 900 9px/1.1 var(--mono);
+  text-align: right;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.entry-citations small {
+  color: var(--muted);
+  font: 700 7px/1 var(--mono);
+}
+
+.entry-citations:hover,
+.entry-citations:hover small {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .communications {
   color: var(--fluor);
   background: var(--black);
@@ -838,6 +870,41 @@ cite {
   background: var(--black);
 }
 
+.profile-links a.instapaper-latest {
+  min-width: 0;
+  padding: 13px clamp(12px, 2vw, 24px);
+  color: var(--fluor);
+  background: var(--black);
+}
+
+.profile-links a.instapaper-latest > .instapaper-latest-copy {
+  min-width: 0;
+  gap: 5px;
+}
+
+.instapaper-latest small {
+  color: inherit;
+}
+
+.instapaper-latest-title {
+  display: -webkit-box;
+  min-width: 0;
+  max-height: 2.4em;
+  overflow: hidden;
+  font: 800 12px/1.2 var(--mono);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.profile-links a.instapaper-latest:hover {
+  padding-right: clamp(12px, 2vw, 24px);
+  padding-left: clamp(18px, 2.6vw, 34px);
+  color: var(--black);
+  background: var(--fluor);
+}
+
 [data-mode="calm"] .profile-links a:nth-child(odd) {
   background: var(--fluor);
 }
@@ -845,6 +912,16 @@ cite {
 [data-mode="calm"] .profile-links a:nth-child(odd):hover {
   color: var(--fluor);
   background: var(--black);
+}
+
+[data-mode="calm"] .profile-links a.instapaper-latest {
+  color: var(--fluor);
+  background: var(--black);
+}
+
+[data-mode="calm"] .profile-links a.instapaper-latest:hover {
+  color: var(--black);
+  background: var(--fluor);
 }
 
 .site-footer {
@@ -1027,8 +1104,18 @@ cite {
   }
 
   .entry-link {
-    grid-column: 2;
     justify-self: start;
+  }
+
+  .entry-actions {
+    grid-column: 2;
+    align-items: flex-start;
+    justify-self: start;
+  }
+
+  .entry-citations {
+    align-items: flex-start;
+    text-align: left;
   }
 
   .communications .entry {
