@@ -904,6 +904,11 @@ cite {
   padding-left: 0;
 }
 
+.profile-links a.osm-link:hover {
+  padding-right: 0;
+  padding-left: 0;
+}
+
 [data-mode="calm"] .profile-links a:nth-child(odd) {
   background: var(--fluor);
 }
