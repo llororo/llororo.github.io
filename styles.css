@@ -909,6 +909,21 @@ cite {
   padding-left: 0;
 }
 
+.profile-links a.instapaper-link > span,
+.profile-links a.osm-link > span {
+  transition: transform 120ms ease-out;
+}
+
+.profile-links a.instapaper-link:hover > span:first-child,
+.profile-links a.osm-link:hover > span:first-child {
+  transform: translateX(10px);
+}
+
+.profile-links a.instapaper-link:hover > span:last-child,
+.profile-links a.osm-link:hover > span:last-child {
+  transform: translateX(-10px);
+}
+
 [data-mode="calm"] .profile-links a:nth-child(odd) {
   background: var(--fluor);
 }
