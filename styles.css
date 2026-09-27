@@ -759,6 +759,7 @@ cite {
 .contact {
   display: grid;
   grid-template-columns: minmax(240px, 0.75fr) minmax(320px, 1.2fr) minmax(210px, 0.55fr);
+  align-items: stretch;
   gap: clamp(24px, 4vw, 64px);
   padding: clamp(72px, 10vw, 150px) var(--page-x);
   border-bottom: var(--border) solid var(--line);
@@ -878,6 +879,10 @@ cite {
   min-width: 0;
 }
 
+.profile-links a.osm-link small {
+  width: min(37ch, 100%);
+}
+
 .instapaper-favorite {
   display: flex;
   flex-direction: column;
@@ -897,31 +902,6 @@ cite {
   -webkit-line-clamp: 2;
   text-overflow: ellipsis;
   white-space: normal;
-}
-
-.profile-links a.instapaper-link:hover {
-  padding-right: 0;
-  padding-left: 0;
-}
-
-.profile-links a.osm-link:hover {
-  padding-right: 0;
-  padding-left: 0;
-}
-
-.profile-links a.instapaper-link > span,
-.profile-links a.osm-link > span {
-  transition: transform 120ms ease-out;
-}
-
-.profile-links a.instapaper-link:hover > span:first-child,
-.profile-links a.osm-link:hover > span:first-child {
-  transform: translateX(10px);
-}
-
-.profile-links a.instapaper-link:hover > span:last-child,
-.profile-links a.osm-link:hover > span:last-child {
-  transform: translateX(-10px);
 }
 
 [data-mode="calm"] .profile-links a:nth-child(odd) {
