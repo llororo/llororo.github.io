@@ -6,5 +6,13 @@
   "display": "standalone",
   "background_color": "#c7ff00",
   "theme_color": "#c7ff00",
-  "lang": "gl"
+  "lang": "gl",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
 }
