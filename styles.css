@@ -385,7 +385,7 @@ cite {
 
 .section-heading {
   display: grid;
-  grid-template-columns: minmax(56px, 0.18fr) minmax(0, 1fr) minmax(140px, 0.24fr);
+  grid-template-columns: minmax(0, 1fr) minmax(140px, 0.24fr);
   align-items: start;
   gap: clamp(18px, 3vw, 48px);
   margin-bottom: clamp(38px, 4.5vw, 68px);
@@ -401,21 +401,11 @@ cite {
   text-transform: uppercase;
 }
 
-.section-number,
 .section-code,
 .card-label {
   margin: 0;
   font: 900 11px/1.25 var(--mono);
   letter-spacing: 0.06em;
-}
-
-.section-number {
-  width: 48px;
-  height: 48px;
-  display: grid;
-  place-items: center;
-  border: var(--border) solid var(--line);
-  border-radius: 50%;
 }
 
 .section-code {
@@ -517,27 +507,10 @@ cite {
   overflow-wrap: anywhere;
 }
 
-.project-details {
-  display: grid;
-  gap: 14px;
+.project-code {
   margin: 22px 0 12px;
   padding-top: 16px;
   border-top: 2px solid currentColor;
-}
-
-.project-details div {
-  display: grid;
-  gap: 5px;
-}
-
-.project-details dt {
-  font: 900 10px/1 var(--mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.project-details dd {
-  margin: 0;
   font-size: 14px;
   font-weight: 800;
   line-height: 1.25;
@@ -585,14 +558,10 @@ cite {
 }
 
 .entry-meta {
-  display: grid;
-  grid-template-columns: 38px 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 12px;
   font: 900 11px/1 var(--mono);
-}
-
-.entry-meta span:last-child {
-  grid-column: 2;
 }
 
 .entry-body h3 {
@@ -716,19 +685,16 @@ cite {
 .upcoming-date {
   width: fit-content;
   align-self: start;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 12px 13px;
-  color: var(--black);
-  background: #ff2bd6;
+  color: #ff2bd6;
+  background: transparent;
   font: 900 11px/1 var(--mono);
   letter-spacing: 0.04em;
 }
 
 .upcoming-date time {
-  font-size: clamp(24px, 3vw, 42px);
-  letter-spacing: -0.07em;
+  display: block;
+  padding: 10px 12px;
+  border: 2px solid #ff2bd6;
 }
 
 .upcoming-body h4 {
@@ -1175,11 +1141,11 @@ cite {
   }
 
   .section-heading {
-    grid-template-columns: 52px minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .section-heading .section-code {
-    grid-column: 2;
+    grid-column: 1;
     justify-self: start;
     text-align: left;
   }
@@ -1321,11 +1287,9 @@ cite {
   }
 
   .entry-meta {
-    grid-template-columns: 38px 62px 1fr;
-  }
-
-  .entry-meta span:last-child {
-    grid-column: auto;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 18px;
   }
 
   .entry-link {
