@@ -283,6 +283,30 @@ cite {
   box-shadow: 5px 5px 0 #ff2bd6;
 }
 
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.hero-footer .hero-upcoming-link {
+  padding: 10px 12px;
+  border: 2px solid var(--black);
+  color: var(--black);
+  background: var(--fluor);
+}
+
+.hero-footer .hero-upcoming-link:hover {
+  transform: translate(-3px, -3px);
+  background: #ff2bd6;
+  box-shadow: 5px 5px 0 var(--black);
+}
+
+.hero-upcoming-short {
+  display: none;
+}
+
 .ticker {
   overflow: hidden;
   border-bottom: var(--border) solid var(--line);
@@ -1250,6 +1274,14 @@ cite {
 
   .hero-footer {
     grid-template-columns: 1fr auto;
+  }
+
+  .hero-upcoming-full {
+    display: none;
+  }
+
+  .hero-upcoming-short {
+    display: inline;
   }
 
   .hero-orcid-full {
