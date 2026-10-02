@@ -649,6 +649,13 @@ cite {
   --muted: rgba(199, 255, 0, 0.7);
 }
 
+[data-mode="calm"] .communications {
+  color: var(--white);
+  --line: var(--white);
+  --ink: var(--white);
+  --muted: rgba(247, 247, 243, 0.7);
+}
+
 .communications .entry {
   grid-template-columns: minmax(120px, 0.22fr) minmax(0, 1fr);
 }
@@ -659,6 +666,66 @@ cite {
 
 .communications .entry-body h3 {
   font-size: clamp(28px, 3.7vw, 60px);
+}
+
+.upcoming-communications {
+  margin-bottom: clamp(42px, 6vw, 78px);
+  border-top: var(--border) solid var(--line);
+}
+
+.upcoming-communications > h3 {
+  margin: 0;
+  padding: 18px 0;
+  border-bottom: var(--border) solid var(--line);
+  font: 900 11px/1.25 var(--mono);
+  letter-spacing: 0.05em;
+}
+
+.upcoming-item {
+  display: grid;
+  grid-template-columns: minmax(115px, 0.2fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 66px);
+  padding: clamp(28px, 4vw, 54px) 0;
+  border-bottom: var(--border) solid var(--line);
+}
+
+.upcoming-date {
+  width: fit-content;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 12px 13px;
+  color: var(--black);
+  background: #ff2bd6;
+  font: 900 11px/1 var(--mono);
+  letter-spacing: 0.04em;
+}
+
+.upcoming-date time {
+  font-size: clamp(24px, 3vw, 42px);
+  letter-spacing: -0.07em;
+}
+
+.upcoming-body h4 {
+  max-width: 1050px;
+  margin: 18px 0 28px;
+  font-size: clamp(31px, 4.4vw, 68px);
+  font-weight: 950;
+  line-height: 0.94;
+  letter-spacing: -0.055em;
+}
+
+.upcoming-body > p:not(.upcoming-event) {
+  margin: 5px 0;
+  font-size: clamp(14px, 1.25vw, 18px);
+  font-weight: 700;
+}
+
+.upcoming-event {
+  margin: 0;
+  font: 900 11px/1.25 var(--mono);
+  letter-spacing: 0.05em;
 }
 
 .outreach-grid {
@@ -1123,6 +1190,10 @@ cite {
 
   .communications .entry:nth-child(even) .entry-body {
     padding-left: 0;
+  }
+
+  .upcoming-item {
+    grid-template-columns: 1fr;
   }
 
   .outreach-card:nth-child(1),
