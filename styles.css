@@ -586,6 +586,16 @@ cite {
   font-weight: 700;
 }
 
+.entry-body .preprint-label {
+  display: inline-block;
+  margin: 0 0 18px;
+  padding: 8px 10px;
+  color: var(--fluor);
+  background: var(--black);
+  font: 900 10px/1.15 var(--mono);
+  letter-spacing: 0.04em;
+}
+
 .entry-link {
   justify-self: end;
   padding: 10px 9px;
