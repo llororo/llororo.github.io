@@ -9,9 +9,9 @@
   "lang": "gl",
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
+      "src": "/favicon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
       "purpose": "any"
     }
   ]
