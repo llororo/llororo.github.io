@@ -75,6 +75,48 @@ cite {
   outline-offset: 4px;
 }
 
+[data-cv-item] {
+  scroll-margin-top: calc(var(--header-height) + 28px);
+}
+
+[data-cv-item]:target h3,
+[data-cv-item]:target h4 {
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in srgb, #ff2bd6 78%, transparent);
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.16em;
+  text-decoration-skip-ink: auto;
+  animation: cv-target-underline 480ms ease-out;
+}
+
+.item-anchor {
+  display: inline-block;
+  margin-left: 0.12em;
+  color: inherit;
+  font: 900 max(11px, 0.25em)/1 var(--mono);
+  letter-spacing: 0;
+  text-decoration: none;
+  vertical-align: top;
+  opacity: 0.42;
+  transform: translateY(0.18em);
+  transition: color 120ms linear, opacity 120ms linear, transform 120ms linear;
+}
+
+.item-anchor:hover,
+.item-anchor:focus-visible,
+[data-cv-item]:target .item-anchor {
+  color: #ff2bd6;
+  opacity: 1;
+  transform: translateY(0.04em);
+}
+
+@keyframes cv-target-underline {
+  from {
+    text-decoration-color: transparent;
+    text-underline-offset: 0.28em;
+  }
+}
+
 .skip-link {
   position: fixed;
   top: 10px;
@@ -821,6 +863,35 @@ cite {
 .outreach-card:nth-child(2) a:hover {
   color: var(--black);
   background: var(--fluor);
+}
+
+.project-card .item-anchor,
+.outreach-card .item-anchor {
+  display: inline-block;
+  align-self: initial;
+  margin: 0 0 0 0.12em;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: 900 max(11px, 0.25em)/1 var(--mono);
+  letter-spacing: 0;
+  text-decoration: none;
+  vertical-align: top;
+  opacity: 0.42;
+  transform: translateY(0.18em);
+}
+
+.project-card .item-anchor:hover,
+.project-card .item-anchor:focus-visible,
+.project-card:target .item-anchor,
+.outreach-card .item-anchor:hover,
+.outreach-card .item-anchor:focus-visible,
+.outreach-card:target .item-anchor {
+  color: #ff2bd6;
+  background: transparent;
+  opacity: 1;
+  transform: translateY(0.04em);
 }
 
 .contact {

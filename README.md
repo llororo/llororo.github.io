@@ -11,3 +11,5 @@ Web persoal de Miguel Guisantes-Alonso, investigador en sociolingüística.
 As comunicacións futuras inclúen os atributos `data-event-date` e `data-event-code` en `index.html`. A acción `archive-events.yml` comproba as datas cada día segundo o fuso horario `Europe/Berlin`.
 
 O evento permanece en «Próximas comunicacións» durante a data indicada. Ó día seguinte, `scripts/archive_events.py` trasládao ó comezo do histórico co ano, o congreso, o título e a autoría, actualiza `sitemap.xml` e oculta o bloque de próximos eventos cando queda baleiro. A acción só crea un commit cando hai un cambio efectivo.
+
+Os elementos do CV usan identificadores permanentes e unha ligazón «#» xunto ó título. O arquivo automático conserva o identificador das comunicacións cando as move ó histórico, para que as ligazóns compartidas continúen funcionando.

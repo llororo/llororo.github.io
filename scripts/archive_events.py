@@ -18,6 +18,7 @@ SITE_TIMEZONE = ZoneInfo("Europe/Berlin")
 
 ARTICLE_RE = re.compile(
     r'(?P<indent>^[ \t]*)<article class="upcoming-item" '
+    r'id="(?P<id>[^"]+)" data-cv-item '
     r'data-event-date="(?P<date>\d{4}-\d{2}-\d{2})" '
     r'data-event-code="(?P<code>[^"]+)">\n'
     r'(?P<body>.*?)'
@@ -27,7 +28,8 @@ ARTICLE_RE = re.compile(
 
 BODY_RE = re.compile(
     r'<p class="upcoming-event">(?P<event>.*?)</p>\s*'
-    r'<h4><cite>(?P<title>.*?)</cite></h4>\s*'
+    r'<h4><cite>(?P<title>.*?)</cite>\s*'
+    r'<a class="item-anchor" href="#[^"]+"[^>]*>#</a></h4>\s*'
     r'<p>(?P<authors>.*?)</p>',
     re.DOTALL,
 )
@@ -35,6 +37,7 @@ BODY_RE = re.compile(
 
 @dataclass(frozen=True)
 class Event:
+    item_id: str
     event_date: date
     code: str
     title: str
@@ -53,13 +56,13 @@ def parse_today(value: str | None) -> date:
 def render_history_entry(event: Event) -> str:
     return (
         '          <li class="entry reveal" '
-        f'id="comunicacion-{event.event_date.isoformat()}" '
+        f'id="{event.item_id}" data-cv-item '
         f'data-archived-date="{event.event_date.isoformat()}">\n'
         '            <div class="entry-meta">'
         f'<time datetime="{event.event_date.year}">{event.event_date.year}</time>'
         f'<span>{event.code}</span></div>\n'
         '            <div class="entry-body">\n'
-        f'              <h3><cite>{event.title}</cite></h3>\n'
+        f'              <h3><cite>{event.title}</cite> <a class="item-anchor" href="#{event.item_id}" aria-label="Ligazón directa a esta comunicación">#</a></h3>\n'
         f'              <p>{event.authors}</p>\n'
         '            </div>\n'
         '          </li>\n'
@@ -93,6 +96,7 @@ def archive_events(html: str, today: date) -> tuple[str, list[Event]]:
 
         archived.append(
             Event(
+                item_id=match.group("id"),
                 event_date=event_date,
                 code=match.group("code"),
                 title=details.group("title").strip(),

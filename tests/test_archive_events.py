@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import shutil
+import re
 import subprocess
 import tempfile
 import unittest
@@ -52,7 +53,8 @@ class ArchiveEventsTest(unittest.TestCase):
         html = self.index.read_text(encoding="utf-8")
         self.assertNotIn('data-event-date="2026-11-20"', html)
         self.assertIn('data-archived-date="2026-11-20"', html)
-        self.assertIn('id="comunicacion-2026-11-20"', html)
+        self.assertIn('id="comunicacion-ciil-2026" data-cv-item', html)
+        self.assertIn('href="#comunicacion-ciil-2026"', html)
         self.assertIn('<time datetime="2026">2026</time><span>CIIL 2026</span>', html)
         self.assertNotIn("EDIFICIO REDEIRAS · UNIVERSIDADE DE VIGO", html)
         self.assertIn('data-event-date="2026-11-26"', html)
@@ -74,6 +76,16 @@ class ArchiveEventsTest(unittest.TestCase):
         output = self.run_archive("2026-11-28")
         self.assertEqual(first_html, self.index.read_text(encoding="utf-8"))
         self.assertIn("Non hai eventos que arquivar", output)
+
+
+class DirectLinksTest(unittest.TestCase):
+    def test_every_cv_item_has_one_stable_direct_link(self) -> None:
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        item_ids = re.findall(r'\bid="([^"]+)" data-cv-item', html)
+        self.assertGreater(len(item_ids), 0)
+        self.assertEqual(len(item_ids), len(set(item_ids)))
+        for item_id in item_ids:
+            self.assertIn(f'href="#{item_id}"', html)
 
 
 if __name__ == "__main__":
