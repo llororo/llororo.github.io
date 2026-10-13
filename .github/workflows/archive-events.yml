@@ -1,0 +1,40 @@
+name: Arquivar eventos pasados
+
+on:
+  schedule:
+    - cron: "17 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: archive-events
+  cancel-in-progress: false
+
+jobs:
+  archive-events:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar o repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Comprobar as datas dos eventos
+        run: python scripts/archive_events.py
+
+      - name: Publicar os cambios necesarios
+        run: |
+          if git diff --quiet -- index.html sitemap.xml; then
+            echo "Non hai cambios que publicar."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html sitemap.xml
+          git commit -m "Arquiva automaticamente eventos pasados"
+          git push
