@@ -73,6 +73,7 @@ cite {
 :focus-visible {
   outline: 4px solid #ff2bd6;
   outline-offset: 4px;
+  box-shadow: 0 0 0 8px var(--black) !important;
 }
 
 [data-cv-item] {
@@ -91,6 +92,7 @@ cite {
 
 .item-anchor {
   display: inline-block;
+  position: relative;
   margin-left: 0.12em;
   color: inherit;
   font: 900 max(11px, 0.25em)/1 var(--mono);
@@ -100,6 +102,24 @@ cite {
   opacity: 0.42;
   transform: translateY(0.18em);
   transition: color 120ms linear, opacity 120ms linear, transform 120ms linear;
+}
+
+.item-anchor::before {
+  position: absolute;
+  inset: -8px;
+  content: "";
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .item-anchor:hover,
@@ -1454,6 +1474,10 @@ cite {
   .entry,
   .communications .entry {
     grid-template-columns: 1fr;
+  }
+
+  .entry-actions {
+    grid-column: 1;
   }
 
   .entry-meta {
