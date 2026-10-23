@@ -1,10 +1,6 @@
 name: Informe diario de visitas
 
 on:
-  push:
-    branches: [master]
-    paths:
-      - ".github/workflows/daily-analytics-report.yml"
   schedule:
     - cron: "17 7 * * *"
   workflow_dispatch:
@@ -34,7 +30,7 @@ jobs:
       SMTP_HOST: mail.gmx.com
       SMTP_PORT: "587"
       REPORT_DATE: ${{ inputs.report_date }}
-      REPORT_FORCE: ${{ github.event_name != 'schedule' && '1' || '0' }}
+      REPORT_FORCE: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
 
     steps:
       - name: Descargar o repositorio
