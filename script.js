@@ -6,6 +6,21 @@ const year = document.querySelector('[data-year]');
 const heroTitle = document.querySelector('#hero-title');
 const heroNames = heroTitle ? [...heroTitle.querySelectorAll('.hero-name')] : [];
 
+document.querySelectorAll('a[target="_blank"]').forEach((link) => {
+  const notice = 'abre nunha nova lapela';
+  const accessibleLabel = link.getAttribute('aria-label');
+
+  if (accessibleLabel) {
+    link.setAttribute('aria-label', `${accessibleLabel}, ${notice}`);
+    return;
+  }
+
+  const screenReaderNotice = document.createElement('span');
+  screenReaderNotice.className = 'sr-only';
+  screenReaderNotice.textContent = `, ${notice}`;
+  link.append(screenReaderNotice);
+});
+
 const fitHeroNames = () => {
   if (!heroTitle || heroNames.length === 0) return;
 
@@ -128,7 +143,7 @@ if (instapaperLink && instapaperTitle) {
       instapaperTitle.textContent = cleanTitle;
       instapaperLink.setAttribute(
         'aria-label',
-        `Abrir o perfil público de Instapaper de Miguel. Último artigo que lle gustou: ${cleanTitle}`
+        `Abrir o perfil público de Instapaper de Miguel. Último artigo que lle gustou: ${cleanTitle}, abre nunha nova lapela`
       );
     })
     .catch(() => {
