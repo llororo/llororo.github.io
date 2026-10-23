@@ -32,7 +32,7 @@
     <meta name="twitter:image" content="https://llororo.github.io/og.png">
     <meta name="twitter:image:alt" content="Miguel Guisantes-Alonso. Sociolingüística, lingua e identidade.">
     <link rel="manifest" href="manifest.webmanifest">
-    <link rel="stylesheet" href="styles.css?v=20261013-direct-links1">
+    <link rel="stylesheet" href="styles.css?v=20261023-privacy3">
     <script>
       document.documentElement.classList.add('js');
       try {
@@ -404,10 +404,35 @@
     </main>
 
     <footer class="site-footer">
-      <p><a class="license-link" href="https://creativecommons.org/licenses/by/4.0/deed.gl" target="_blank" rel="license noreferrer">CC BY 4.0</a> · <span data-year>2026</span> MIGUEL GUISANTES-ALONSO</p>
-      <a href="#inicio">ARRIBA ↑</a>
+      <div class="footer-bar">
+        <p><a class="license-link" href="https://creativecommons.org/licenses/by/4.0/deed.gl" target="_blank" rel="license noreferrer">CC BY 4.0</a> · <span data-year>2026</span> MIGUEL GUISANTES-ALONSO</p>
+        <div class="footer-actions">
+          <button class="privacy-toggle" type="button" aria-expanded="false" aria-controls="privacidade" data-privacy-toggle>
+            <span>PRIVACIDADE</span>
+            <span class="privacy-toggle-symbol" aria-hidden="true" data-privacy-symbol>+</span>
+          </button>
+          <a class="footer-top-link" href="#inicio">ARRIBA ↑</a>
+        </div>
+      </div>
+
+      <section class="privacy-panel" id="privacidade" aria-labelledby="privacy-title" hidden>
+        <header class="privacy-heading">
+          <p>INFORMACIÓN SOBRE</p>
+          <h2 id="privacy-title">PRIVACIDADE</h2>
+          <time datetime="2026">2026</time>
+        </header>
+
+        <div class="privacy-copy">
+          <p><strong>Responsable.</strong> Miguel Guisantes-Alonso. Podes contactar mediante o botón de correo desta web.</p>
+          <p><strong>Contacto.</strong> Se escribes, tratarei o teu enderezo de correo, o contido da mensaxe e os datos que decidas incluír para responder á túa comunicación. A base xurídica é o interese lexítimo en atender a solicitude iniciada por ti. Conservarei estes datos durante o tempo necesario para xestionala e, despois, durante os prazos legais aplicables.</p>
+          <p><strong>Cookies e preferencia visual.</strong> Esta web non usa cookies. Garda no teu navegador unicamente a elección entre os modos «flúor» e «calma», que podes modificar en calquera momento.</p>
+          <p><strong>Servizos técnicos.</strong> A web está aloxada en <a href="https://docs.github.com/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noreferrer">GitHub Pages</a>. <a href="https://developers.cloudflare.com/web-analytics/about/" target="_blank" rel="noreferrer">Cloudflare Web Analytics</a> fornece estatísticas agregadas sen cookies e, segundo Cloudflare, sen recoller nin usar datos persoais. Os Workers de Cloudflare protexen o contacto, limitan temporalmente as solicitudes mediante o enderezo IP e consultan o último favorito de Instapaper. O navegador tamén consulta <a href="https://openalex.org/" target="_blank" rel="noreferrer">OpenAlex</a> para actualizar o reconto de citas.</p>
+          <p><strong>Dereitos.</strong> Podes solicitar o acceso, a rectificación ou a supresión dos teus datos, así como a limitación ou a oposición ó seu tratamento, mediante o botón de contacto. Tamén podes presentar unha reclamación ante a <a href="https://www.aepd.es/" target="_blank" rel="noreferrer">Axencia Española de Protección de Datos</a>.</p>
+          <p><strong>Ligazóns externas.</strong> Ó seguir unha ligazón a outro sitio, aplicarase a política de privacidade dese servizo.</p>
+        </div>
+      </section>
     </footer>
 
-    <script src="script.js?v=20260927-instapaper-auto1" defer></script>
+    <script src="script.js?v=20261023-privacy1" defer></script>
   </body>
 </html>
