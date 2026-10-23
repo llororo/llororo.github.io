@@ -36,6 +36,7 @@ jobs:
             --no-progress
             --verbose
             --accept 200,206,403,429
+            --exclude '^https://www\.linkedin\.com/'
             './index.html'
             './README.md'
             './sitemap.xml'
