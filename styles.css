@@ -1511,26 +1511,3 @@ cite {
     transform: none;
   }
 }
-
-@media print {
-  .site-header,
-  .ticker,
-  .mode-toggle {
-    display: none;
-  }
-
-  body,
-  .hero,
-  .bio-note,
-  .section,
-  .contact,
-  .outreach-card,
-  .email-box {
-    color: #000;
-    background: #fff;
-  }
-
-  .hero {
-    min-height: auto;
-  }
-}
