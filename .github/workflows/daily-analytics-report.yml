@@ -1,0 +1,45 @@
+name: Informe diario de visitas
+
+on:
+  schedule:
+    - cron: "17 7 * * *"
+  workflow_dispatch:
+    inputs:
+      report_date:
+        description: "Data que se quere consultar (AAAA-MM-DD). Baleiro: onte."
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: daily-analytics-report
+  cancel-in-progress: false
+
+jobs:
+  send-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      REPORT_EMAIL: ${{ secrets.REPORT_EMAIL }}
+      SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+      SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+      SMTP_HOST: mail.gmx.com
+      SMTP_PORT: "587"
+      REPORT_DATE: ${{ inputs.report_date }}
+      REPORT_FORCE: ${{ github.event_name == 'workflow_dispatch' && '1' || '0' }}
+
+    steps:
+      - name: Descargar o repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Consultar as visitas e enviar o informe
+        run: python scripts/daily_analytics_report.py
