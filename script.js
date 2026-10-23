@@ -81,6 +81,36 @@ const emailAction = document.querySelector('[data-email-action]');
 const contactWorker = 'https://contacto-aleatorio.miguel-guisantes.workers.dev';
 const instapaperLink = document.querySelector('[data-instapaper-link]');
 const instapaperTitle = document.querySelector('[data-instapaper-title]');
+const privacyToggle = document.querySelector('[data-privacy-toggle]');
+const privacyPanel = document.querySelector('#privacidade');
+const privacySymbol = document.querySelector('[data-privacy-symbol]');
+
+const setPrivacyPanel = (open, { focus = false } = {}) => {
+  if (!privacyToggle || !privacyPanel) return;
+
+  privacyPanel.hidden = !open;
+  privacyToggle.setAttribute('aria-expanded', String(open));
+  if (privacySymbol) privacySymbol.textContent = open ? '−' : '+';
+
+  if (open && focus) {
+    privacyPanel.scrollIntoView({ block: 'start' });
+    privacyPanel.querySelector('a, button')?.focus({ preventScroll: true });
+  }
+};
+
+privacyToggle?.addEventListener('click', () => {
+  setPrivacyPanel(privacyToggle.getAttribute('aria-expanded') !== 'true');
+});
+
+const openPrivacyFromHash = () => {
+  if (window.location.hash !== '#privacidade' || !privacyPanel) return;
+
+  setPrivacyPanel(true);
+  requestAnimationFrame(() => privacyPanel.scrollIntoView({ block: 'start' }));
+};
+
+window.addEventListener('hashchange', openPrivacyFromHash);
+openPrivacyFromHash();
 
 if (instapaperLink && instapaperTitle) {
   fetch(`${contactWorker}/instapaper-latest`, {
