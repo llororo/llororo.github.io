@@ -1053,30 +1053,129 @@ cite {
 
 .site-footer {
   min-height: 110px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  gap: 24px;
   padding: 20px var(--page-x);
   color: var(--fluor);
   background: var(--black);
   font: 900 11px/1.2 var(--mono);
 }
 
+.footer-bar {
+  min-height: 70px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 24px;
+}
+
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .site-footer p {
   margin: 0;
 }
 
-.site-footer a {
+.footer-top-link,
+.privacy-toggle {
   padding: 10px;
   border: 2px solid currentColor;
+  color: inherit;
+  background: transparent;
+  font: inherit;
   text-decoration: none;
+}
+
+.privacy-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.privacy-toggle:hover,
+.footer-top-link:hover {
+  color: var(--black);
+  background: var(--fluor);
+}
+
+.privacy-toggle-symbol {
+  width: 1ch;
+  text-align: center;
 }
 
 .site-footer .license-link {
   padding: 0;
   border: 0;
   text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.privacy-panel {
+  scroll-margin-top: calc(var(--header-height) + 16px);
+  padding: clamp(30px, 5vw, 66px) 0 clamp(18px, 3vw, 38px);
+  border-top: 2px solid currentColor;
+}
+
+.privacy-panel[hidden] {
+  display: none;
+}
+
+.privacy-heading {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 8px 24px;
+  margin-bottom: clamp(28px, 4vw, 54px);
+}
+
+.privacy-heading p,
+.privacy-heading h2,
+.privacy-heading time,
+.privacy-copy p {
+  margin: 0;
+}
+
+.privacy-heading p {
+  grid-column: 1 / -1;
+  font-size: 10px;
+}
+
+.privacy-heading h2 {
+  font-family: var(--display);
+  font-size: clamp(34px, 4vw, 62px);
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+}
+
+.privacy-heading time {
+  font-size: 10px;
+}
+
+.privacy-copy {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid color-mix(in srgb, var(--fluor) 52%, transparent);
+  border-left: 1px solid color-mix(in srgb, var(--fluor) 52%, transparent);
+}
+
+.privacy-copy p {
+  min-width: 0;
+  padding: clamp(18px, 2.6vw, 34px);
+  border-right: 1px solid color-mix(in srgb, var(--fluor) 52%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--fluor) 52%, transparent);
+  font: 600 clamp(12px, 1vw, 15px)/1.55 var(--mono);
+  overflow-wrap: anywhere;
+}
+
+.privacy-copy strong {
+  color: var(--white);
+}
+
+.privacy-copy a {
+  text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 
@@ -1372,11 +1471,24 @@ cite {
   }
 
   .site-footer {
-    grid-template-columns: 1fr;
+    padding-top: 16px;
   }
 
-  .site-footer a {
-    justify-self: start;
+  .footer-bar {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .footer-actions {
+    flex-wrap: wrap;
+  }
+
+  .privacy-panel {
+    margin-top: 18px;
+  }
+
+  .privacy-copy {
+    grid-template-columns: 1fr;
   }
 }
 
