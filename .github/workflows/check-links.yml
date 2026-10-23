@@ -1,0 +1,46 @@
+name: Comprobar ligazóns
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - index.html
+      - README.md
+      - sitemap.xml
+      - .github/workflows/check-links.yml
+  schedule:
+    - cron: "17 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-links
+  cancel-in-progress: true
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Descargar o repositorio
+        uses: actions/checkout@v4
+
+      - name: Comprobar as ligazóns da web
+        uses: lycheeverse/lychee-action@v2.9.0
+        with:
+          args: >-
+            --root-dir "${{ github.workspace }}"
+            --no-progress
+            --verbose
+            --accept 200,206,403,429
+            './index.html'
+            './README.md'
+            './sitemap.xml'
+          fail: true
+          failIfEmpty: true
+          format: markdown
+          jobSummary: true
+          token: "${{ secrets.GITHUB_TOKEN }}"
