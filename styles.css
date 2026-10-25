@@ -34,17 +34,22 @@ html {
   color-scheme: light;
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-height) + 24px);
-  background: var(--bg);
+  background: var(--black);
 }
 
 body {
   margin: 0;
   color: var(--ink);
-  background: var(--bg);
+  background: var(--black);
   font-family: var(--display);
   font-size: 16px;
   line-height: 1.35;
-  transition: background-color 160ms linear, color 160ms linear;
+  transition: color 160ms linear;
+}
+
+main {
+  background: var(--bg);
+  transition: background-color 160ms linear;
 }
 
 ::selection {
