@@ -256,6 +256,18 @@ cite {
   display: block;
 }
 
+.hero-title-interactive {
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+}
+
+.hero-letter {
+  display: inline-block;
+  transform: translate3d(var(--letter-x, 0), var(--letter-y, 0), 0);
+  will-change: transform;
+}
+
 .js .hero-name {
   --float-x: 4px;
   --float-y: -4px;
@@ -1538,5 +1550,9 @@ cite {
   .js .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .hero-letter {
+    transform: none !important;
   }
 }
