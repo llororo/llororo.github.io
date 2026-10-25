@@ -2,9 +2,11 @@ const root = document.documentElement;
 const modeButton = document.querySelector('[data-mode-toggle]');
 const modeLabel = document.querySelector('[data-mode-label]');
 const themeColor = document.querySelector('meta[name="theme-color"]');
+const siteFooter = document.querySelector('.site-footer');
 const year = document.querySelector('[data-year]');
 const heroTitle = document.querySelector('#hero-title');
 const heroNames = heroTitle ? [...heroTitle.querySelectorAll('.hero-name')] : [];
+let footerInView = false;
 
 document.querySelectorAll('a[target="_blank"]').forEach((link) => {
   const notice = 'abre nunha nova lapela';
@@ -78,15 +80,33 @@ if (document.fonts?.ready) {
   document.fonts.ready.then(queueHeroFit);
 }
 
+const updateThemeColor = () => {
+  if (!themeColor) return;
+
+  const pageColor = root.dataset.mode === 'calm' ? '#f7f7f3' : '#c7ff00';
+  themeColor.setAttribute('content', footerInView ? '#000000' : pageColor);
+};
+
 const updateMode = () => {
   const calm = root.dataset.mode === 'calm';
   modeButton.setAttribute('aria-pressed', String(calm));
   modeButton.setAttribute('aria-label', calm ? 'Activar o modo flúor' : 'Activar o modo calma');
   modeLabel.textContent = calm ? 'CALMA → FLÚOR' : 'FLÚOR → CALMA';
-  themeColor.setAttribute('content', calm ? '#f7f7f3' : '#c7ff00');
+  updateThemeColor();
 };
 
 updateMode();
+
+if (siteFooter && 'IntersectionObserver' in window) {
+  const footerThemeObserver = new IntersectionObserver((entries) => {
+    footerInView = entries.some((entry) => entry.isIntersecting);
+    updateThemeColor();
+  }, {
+    threshold: 0.01
+  });
+
+  footerThemeObserver.observe(siteFooter);
+}
 
 if (year) {
   year.textContent = new Date().getFullYear();
