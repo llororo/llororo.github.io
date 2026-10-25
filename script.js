@@ -6,7 +6,131 @@ const siteFooter = document.querySelector('.site-footer');
 const year = document.querySelector('[data-year]');
 const heroTitle = document.querySelector('#hero-title');
 const heroNames = heroTitle ? [...heroTitle.querySelectorAll('.hero-name')] : [];
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 let footerInView = false;
+
+const createHeroLetterMotion = () => {
+  if (!heroTitle || heroNames.length === 0 || reduceMotion.matches) return;
+
+  const letters = [];
+
+  heroNames.forEach((name) => {
+    [...name.children].forEach((part) => {
+      const text = part.textContent;
+      part.textContent = '';
+
+      [...text].forEach((character) => {
+        const letter = document.createElement('span');
+        letter.className = 'hero-letter';
+        letter.textContent = character;
+        part.append(letter);
+        letters.push({
+          element: letter,
+          x: 0,
+          y: 0,
+          velocityX: 0,
+          velocityY: 0
+        });
+      });
+    });
+  });
+
+  heroTitle.classList.add('hero-title-interactive');
+
+  const pointer = {
+    active: false,
+    x: 0,
+    y: 0
+  };
+  let motionFrame = 0;
+
+  const requestMotionFrame = () => {
+    if (motionFrame) return;
+    motionFrame = requestAnimationFrame(updateLetters);
+  };
+
+  const updateLetters = () => {
+    motionFrame = 0;
+    let moving = false;
+    const repulsionRadius = Math.min(Math.max(window.innerWidth * 0.12, 96), 168);
+
+    letters.forEach((letter) => {
+      const rect = letter.element.getBoundingClientRect();
+      const centerX = rect.left + (rect.width / 2) - letter.x;
+      const centerY = rect.top + (rect.height / 2) - letter.y;
+      const distanceX = centerX - pointer.x;
+      const distanceY = centerY - pointer.y;
+      const distance = Math.hypot(distanceX, distanceY) || 1;
+      const proximity = pointer.active
+        ? Math.max(0, 1 - (distance / repulsionRadius))
+        : 0;
+      const displacement = proximity * proximity * 22;
+      const targetX = (distanceX / distance) * displacement;
+      const targetY = (distanceY / distance) * displacement;
+
+      letter.velocityX = (letter.velocityX + ((targetX - letter.x) * 0.14)) * 0.76;
+      letter.velocityY = (letter.velocityY + ((targetY - letter.y) * 0.14)) * 0.76;
+      letter.x += letter.velocityX;
+      letter.y += letter.velocityY;
+
+      if (
+        Math.abs(letter.x - targetX) > 0.02
+        || Math.abs(letter.y - targetY) > 0.02
+        || Math.abs(letter.velocityX) > 0.02
+        || Math.abs(letter.velocityY) > 0.02
+      ) {
+        moving = true;
+      }
+
+      letter.element.style.setProperty('--letter-x', `${letter.x.toFixed(2)}px`);
+      letter.element.style.setProperty('--letter-y', `${letter.y.toFixed(2)}px`);
+    });
+
+    if (moving) requestMotionFrame();
+  };
+
+  heroTitle.addEventListener('pointermove', (event) => {
+    if (event.pointerType === 'touch') return;
+    pointer.active = true;
+    pointer.x = event.clientX;
+    pointer.y = event.clientY;
+    requestMotionFrame();
+  }, { passive: true });
+
+  heroTitle.addEventListener('pointerleave', () => {
+    pointer.active = false;
+    requestMotionFrame();
+  }, { passive: true });
+
+  heroTitle.addEventListener('pointerdown', (event) => {
+    const titleRect = heroTitle.getBoundingClientRect();
+    const reach = Math.hypot(titleRect.width, titleRect.height) || 1;
+
+    letters.forEach((letter, index) => {
+      const rect = letter.element.getBoundingClientRect();
+      const centerX = rect.left + (rect.width / 2) - letter.x;
+      const centerY = rect.top + (rect.height / 2) - letter.y;
+      let distanceX = centerX - event.clientX;
+      let distanceY = centerY - event.clientY;
+      let distance = Math.hypot(distanceX, distanceY);
+
+      if (distance < 1) {
+        const angle = (index / letters.length) * Math.PI * 2;
+        distanceX = Math.cos(angle);
+        distanceY = Math.sin(angle);
+        distance = 1;
+      }
+
+      const impulse = Math.max(2.5, 13 * (1 - Math.min(distance / reach, 0.82)));
+      letter.velocityX += (distanceX / distance) * impulse;
+      letter.velocityY += (distanceY / distance) * impulse;
+    });
+
+    requestMotionFrame();
+  }, { passive: true });
+};
+
+createHeroLetterMotion();
 
 document.querySelectorAll('a[target="_blank"]').forEach((link) => {
   const notice = 'abre nunha nova lapela';
