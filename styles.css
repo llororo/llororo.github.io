@@ -610,6 +610,12 @@ cite {
   text-decoration: none;
 }
 
+.project-card > a:hover,
+.project-card > a:focus-visible {
+  color: var(--black);
+  background: #ff2bd6;
+}
+
 .didactics-break {
   display: none;
 }
