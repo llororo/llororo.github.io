@@ -604,6 +604,7 @@ cite {
 .project-card a {
   align-self: flex-start;
   padding: 12px 14px;
+  border: 2px solid var(--black);
   color: var(--fluor);
   background: var(--black);
   font: 900 11px/1 var(--mono);
@@ -614,6 +615,8 @@ cite {
 .project-card > a:focus-visible {
   color: var(--black);
   background: #ff2bd6;
+  transform: translate(-3px, -3px);
+  box-shadow: 5px 5px 0 var(--black);
 }
 
 .didactics-break {
