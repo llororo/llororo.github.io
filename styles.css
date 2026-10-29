@@ -404,7 +404,7 @@ cite {
 }
 
 .ticker span {
-  padding: 15px 12px;
+  padding: 15px 0.12em;
   font-size: clamp(18px, 2.3vw, 34px);
   font-weight: 950;
   line-height: 1;
