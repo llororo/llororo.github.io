@@ -1119,6 +1119,21 @@ cite {
   gap: 12px;
 }
 
+.footer-meta {
+  display: grid;
+  gap: 7px;
+}
+
+.page-updated {
+  color: color-mix(in srgb, var(--fluor) 68%, var(--black));
+  font-size: 9px;
+  letter-spacing: 0.035em;
+}
+
+.page-updated time {
+  color: var(--fluor);
+}
+
 .site-footer p {
   margin: 0;
 }
