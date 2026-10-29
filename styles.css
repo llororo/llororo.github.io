@@ -19,7 +19,7 @@
   --bg: var(--white);
   --ink: var(--black);
   --panel: var(--black);
-  --panel-ink: var(--fluor);
+  --panel-ink: var(--white);
   --line: var(--black);
   --muted: rgba(5, 5, 5, 0.66);
 }
@@ -393,6 +393,10 @@ cite {
   background: var(--black);
 }
 
+[data-mode="calm"] .ticker {
+  color: var(--white);
+}
+
 .ticker-track {
   width: max-content;
   display: flex;
@@ -574,7 +578,7 @@ cite {
 }
 
 [data-mode="calm"] .project-card {
-  background: var(--fluor);
+  background: var(--white);
 }
 
 .project-card h3 {
@@ -850,7 +854,12 @@ cite {
 
 [data-mode="calm"] .outreach-card:nth-child(1),
 [data-mode="calm"] .outreach-card:nth-child(3) {
-  background: var(--fluor);
+  background: var(--white);
+}
+
+[data-mode="calm"] .outreach-card:nth-child(2),
+[data-mode="calm"] .outreach-card:nth-child(5) {
+  color: var(--white);
 }
 
 .outreach-date {
@@ -968,7 +977,7 @@ cite {
 }
 
 [data-mode="calm"] .email-box {
-  background: var(--fluor);
+  background: var(--white);
 }
 
 .email-box h3 {
@@ -1088,21 +1097,24 @@ cite {
   white-space: normal;
 }
 
-[data-mode="calm"] .profile-links a:nth-child(odd) {
-  background: var(--fluor);
-}
-
-[data-mode="calm"] .profile-links a:nth-child(odd):hover {
-  color: var(--fluor);
-  background: var(--black);
-}
-
 .site-footer {
   min-height: 110px;
   padding: 20px var(--page-x);
   color: var(--fluor);
   background: var(--black);
   font: 900 11px/1.2 var(--mono);
+}
+
+[data-mode="calm"] .site-footer {
+  color: var(--white);
+}
+
+[data-mode="calm"] .page-updated {
+  color: color-mix(in srgb, var(--white) 68%, var(--black));
+}
+
+[data-mode="calm"] .page-updated time {
+  color: var(--white);
 }
 
 .footer-bar {
