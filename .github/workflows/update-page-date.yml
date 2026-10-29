@@ -18,19 +18,19 @@ permissions:
 
 concurrency:
   group: update-page-date
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   update-page-date:
     runs-on: ubuntu-latest
     steps:
       - name: Descargar o historial completo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Preparar Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
