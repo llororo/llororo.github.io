@@ -200,7 +200,8 @@
 
   .work-grid,
   .entry-list,
-  .outreach-grid {
+  .outreach-grid,
+  .media-mentions-list {
     display: block;
     margin: 0;
     padding: 0;
@@ -211,7 +212,8 @@
   .project-card,
   .entry,
   .upcoming-item,
-  .outreach-card {
+  .outreach-card,
+  .media-mention {
     display: block;
     min-height: 0;
     margin: 0 0 3.5mm;
@@ -266,6 +268,54 @@
     overflow-wrap: break-word;
     break-after: avoid-page;
     page-break-after: avoid;
+  }
+
+  .media-mentions {
+    margin: 5mm 0 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .media-mentions-title {
+    margin: 0 0 2.5mm;
+    padding: 0 0 1.25mm;
+    border: 0;
+    border-bottom: 0.5pt solid #777;
+    font: 800 10pt/1.1 Arial, Helvetica, sans-serif;
+    letter-spacing: 0.05em;
+    break-after: avoid-page;
+    page-break-after: avoid;
+  }
+
+  .media-mention {
+    margin-bottom: 2.5mm;
+    padding-bottom: 2mm;
+  }
+
+  .media-mention-title {
+    display: block;
+    margin: 0 0 1mm;
+    font: 700 9.5pt/1.25 Arial, Helvetica, sans-serif;
+    letter-spacing: 0;
+  }
+
+  .media-mention-title > span {
+    display: none;
+  }
+
+  .media-mention-meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 2mm;
+    margin: 0;
+    font: 700 7.5pt/1.25 Arial, Helvetica, sans-serif;
+    letter-spacing: 0.025em;
+  }
+
+  .media-mention-meta > :not(:first-child)::before {
+    content: "·";
+    margin-right: 2mm;
   }
 
   .thesis-card dl {

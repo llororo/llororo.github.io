@@ -949,6 +949,89 @@ cite {
   transform: translateY(0.04em);
 }
 
+.media-mentions {
+  margin-top: clamp(64px, 6vw, 92px);
+  border-top: var(--border) solid var(--line);
+}
+
+.media-mentions-title {
+  margin: 0;
+  padding: 16px 0 15px;
+  border-bottom: var(--border) solid var(--line);
+  font: 900 clamp(18px, 2vw, 28px)/1 var(--mono);
+  letter-spacing: 0.015em;
+}
+
+.media-mentions-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.media-mention {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: clamp(22px, 4vw, 68px);
+  padding: clamp(20px, 2.7vw, 34px) 0;
+  border-bottom: 2px solid var(--line);
+}
+
+.media-mention-title {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px;
+  align-items: start;
+  color: inherit;
+  font-size: clamp(21px, 2.45vw, 38px);
+  font-weight: 950;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+  text-decoration: none;
+}
+
+.media-mention-title cite {
+  font-style: normal;
+}
+
+.media-mention-title > span {
+  font: 900 15px/1 var(--mono);
+  transition: transform 160ms ease;
+}
+
+.media-mention-title:hover cite,
+.media-mention-title:focus-visible cite {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+}
+
+.media-mention-title:hover > span,
+.media-mention-title:focus-visible > span {
+  transform: translate(3px, -3px);
+}
+
+.media-mention-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 9px;
+  margin: 1px 0 0;
+  font: 900 11px/1 var(--mono);
+  letter-spacing: 0.025em;
+  white-space: nowrap;
+}
+
+.media-mention-meta > :not(:first-child)::before {
+  content: "·";
+  margin-right: 9px;
+}
+
+.media-mention-type {
+  text-transform: uppercase;
+}
+
 .contact {
   display: grid;
   grid-template-columns: minmax(240px, 0.75fr) minmax(320px, 1.2fr) minmax(210px, 0.55fr);
@@ -1439,6 +1522,15 @@ cite {
     transform: none;
   }
 
+  .media-mention {
+    grid-template-columns: 1fr;
+    gap: 13px;
+  }
+
+  .media-mention-meta {
+    justify-content: flex-start;
+  }
+
   .contact {
     grid-template-columns: 1fr;
   }
@@ -1545,6 +1637,34 @@ cite {
 
   .outreach-card {
     min-height: 380px;
+  }
+
+  .media-mentions {
+    margin-top: 64px;
+  }
+
+  .media-mentions-title {
+    padding: 14px 0 13px;
+  }
+
+  .media-mention {
+    padding: 22px 0;
+  }
+
+  .media-mention-title {
+    gap: 12px;
+    font-size: clamp(20px, 6.4vw, 28px);
+    line-height: 1.04;
+  }
+
+  .media-mention-meta {
+    gap: 7px;
+    line-height: 1.35;
+    white-space: normal;
+  }
+
+  .media-mention-meta > :not(:first-child)::before {
+    margin-right: 7px;
   }
 
   .site-footer {
