@@ -1032,6 +1032,47 @@ cite {
   text-transform: uppercase;
 }
 
+.media-mentions-more {
+  margin: 0;
+}
+
+.media-mentions-more summary {
+  width: max-content;
+  margin: 24px 0 0 auto;
+  padding: 12px 14px;
+  border: 2px solid var(--line);
+  color: var(--ink);
+  background: var(--bg);
+  font: 900 11px/1 var(--mono);
+  letter-spacing: 0.025em;
+  list-style: none;
+  cursor: pointer;
+  transition: color 160ms linear, background-color 160ms linear, transform 160ms ease;
+}
+
+.media-mentions-more summary::-webkit-details-marker {
+  display: none;
+}
+
+.media-mentions-more summary:hover,
+.media-mentions-more summary:focus-visible {
+  color: var(--fluor);
+  background: var(--black);
+  transform: translate(-3px, -3px);
+}
+
+.media-more-close {
+  display: none;
+}
+
+.media-mentions-more[open] .media-more-open {
+  display: none;
+}
+
+.media-mentions-more[open] .media-more-close {
+  display: inline;
+}
+
 .contact {
   display: grid;
   grid-template-columns: minmax(240px, 0.75fr) minmax(320px, 1.2fr) minmax(210px, 0.55fr);
@@ -1665,6 +1706,10 @@ cite {
 
   .media-mention-meta > :not(:first-child)::before {
     margin-right: 7px;
+  }
+
+  .media-mentions-more summary {
+    margin-top: 18px;
   }
 
   .site-footer {
