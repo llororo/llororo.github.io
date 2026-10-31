@@ -318,6 +318,19 @@
     margin-right: 2mm;
   }
 
+  .media-mentions-more {
+    display: block;
+    margin: 0;
+  }
+
+  .media-mentions-more > summary {
+    display: none;
+  }
+
+  .media-mentions-more > .media-mentions-list {
+    display: block !important;
+  }
+
   .thesis-card dl {
     display: block;
     margin: 2mm 0 0;
