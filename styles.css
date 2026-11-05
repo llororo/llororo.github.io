@@ -726,6 +726,38 @@ cite {
   text-underline-offset: 3px;
 }
 
+.entry-altmetric {
+  color: var(--ink);
+  font: 900 8px/1.1 var(--mono);
+  text-align: right;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.entry-altmetric:hover,
+.entry-altmetric:focus-visible {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.outreach-card .entry-altmetric {
+  flex-basis: auto;
+  width: max-content;
+  margin-top: 0;
+  padding: 0;
+  border: 0;
+  color: inherit;
+  background: transparent;
+  font: 900 8px/1.1 var(--mono);
+}
+
+.outreach-card .entry-altmetric:hover,
+.outreach-card .entry-altmetric:focus-visible {
+  color: inherit;
+  background: transparent;
+}
+
 .communications {
   color: var(--fluor);
   background: var(--black);
@@ -908,6 +940,11 @@ cite {
 
 .outreach-links a {
   margin-top: 0;
+}
+
+.outreach-links.outreach-metrics {
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .outreach-card a:hover {

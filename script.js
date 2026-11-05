@@ -321,6 +321,45 @@ citationCounters.forEach(async (counter) => {
   }
 });
 
+const altmetricSources = [...document.querySelectorAll('[data-altmetric-source]')];
+
+altmetricSources.forEach((altmetricSource) => {
+  const sourceId = altmetricSource.dataset.altmetricSource;
+  const altmetricOutput = [...document.querySelectorAll('[data-altmetric-output]')]
+    .find((output) => output.dataset.altmetricOutput === sourceId);
+  if (!altmetricOutput) return;
+
+  const scoreNode = altmetricOutput.querySelector('[data-altmetric-score]');
+
+  const updateAltmetricScore = () => {
+    const badgeImage = altmetricSource.querySelector('img');
+    if (!badgeImage || !scoreNode) return;
+
+    const scoreMatch = badgeImage.alt.match(/score of (\d+)/i)
+      || badgeImage.src.match(/[?&]score=(\d+)/i);
+    if (!scoreMatch) return;
+
+    const score = Number.parseInt(scoreMatch[1], 10);
+    if (!Number.isInteger(score) || score < 0) return;
+
+    const badgeLink = altmetricSource.querySelector('a[href]');
+    if (badgeLink) altmetricOutput.href = badgeLink.href;
+    scoreNode.textContent = String(score);
+    altmetricOutput.hidden = false;
+    altmetricOutput.setAttribute(
+      'aria-label',
+      `Abrir en Altmetric os datos de atención en liña deste artigo. Puntuación Altmetric: ${score}`
+    );
+    altmetricOutput.dataset.altmetricStatus = 'live';
+  };
+
+  new MutationObserver(updateAltmetricScore).observe(altmetricSource, {
+    childList: true,
+    subtree: true
+  });
+  updateAltmetricScore();
+});
+
 const fallbackContact = () => {
   const contactCodes = [
     109, 97, 105, 108, 116, 111, 58,

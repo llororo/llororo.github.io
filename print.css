@@ -387,6 +387,7 @@
   .project-card > a,
   .entry-link,
   .entry-citations,
+  .entry-altmetric,
   .outreach-card > a,
   .outreach-links a {
     display: inline;
@@ -435,6 +436,10 @@
 
   .entry-citations {
     text-align: left;
+  }
+
+  .altmetric-source {
+    display: none !important;
   }
 
   .entry-citations small {
