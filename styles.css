@@ -86,7 +86,8 @@ cite {
 }
 
 [data-cv-item]:target h3,
-[data-cv-item]:target h4 {
+[data-cv-item]:target h4,
+.media-mentions-title:target {
   text-decoration-line: underline;
   text-decoration-color: color-mix(in srgb, #ff2bd6 78%, transparent);
   text-decoration-thickness: 0.06em;
@@ -129,7 +130,8 @@ cite {
 
 .item-anchor:hover,
 .item-anchor:focus-visible,
-[data-cv-item]:target .item-anchor {
+[data-cv-item]:target .item-anchor,
+.media-mentions-title:target .item-anchor {
   color: #ff2bd6;
   opacity: 1;
   transform: translateY(0.04em);
