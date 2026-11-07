@@ -399,6 +399,16 @@ cite {
   color: var(--white);
 }
 
+[data-mode="calm"] .hero-name,
+[data-mode="calm"] .ticker-track,
+[data-mode="calm"] .status span {
+  animation: none;
+}
+
+[data-mode="calm"] .hero-letter {
+  transform: none !important;
+}
+
 .ticker-track {
   width: max-content;
   display: flex;

@@ -90,7 +90,7 @@ const createHeroLetterMotion = () => {
   };
 
   heroTitle.addEventListener('pointermove', (event) => {
-    if (event.pointerType === 'touch') return;
+    if (event.pointerType === 'touch' || root.dataset.mode === 'calm') return;
     pointer.active = true;
     pointer.x = event.clientX;
     pointer.y = event.clientY;
@@ -103,6 +103,7 @@ const createHeroLetterMotion = () => {
   }, { passive: true });
 
   heroTitle.addEventListener('pointerdown', (event) => {
+    if (root.dataset.mode === 'calm') return;
     const titleRect = heroTitle.getBoundingClientRect();
     const reach = Math.hypot(titleRect.width, titleRect.height) || 1;
 
@@ -121,7 +122,7 @@ const createHeroLetterMotion = () => {
         distance = 1;
       }
 
-      const impulse = Math.max(2.5, 13 * (1 - Math.min(distance / reach, 0.82)));
+      const impulse = Math.max(3.5, 18 * (1 - Math.min(distance / reach, 0.82)));
       letter.velocityX += (distanceX / distance) * impulse;
       letter.velocityY += (distanceY / distance) * impulse;
     });
