@@ -24,7 +24,10 @@ class DailyAnalyticsReportTests(unittest.TestCase):
 
     def test_report_groups_search_engines_and_empty_referrers(self):
         data = {
-            "total": [{"count": 9, "sum": {"visits": 7}}],
+            "total": [
+                {"count": 4, "sum": {"visits": 3}, "avg": {"sampleInterval": 1}},
+                {"count": 5, "sum": {"visits": 4}, "avg": {"sampleInterval": 2}},
+            ],
             "countries": [
                 {"count": 6, "dimensions": {"countryName": "ES"}},
                 {"count": 3, "dimensions": {"countryName": "DE"}},
@@ -43,6 +46,7 @@ class DailyAnalyticsReportTests(unittest.TestCase):
 
         self.assertEqual(report.pageviews, 9)
         self.assertEqual(report.visits, 7)
+        self.assertEqual(report.sample_interval, 2)
         self.assertEqual(report.referrers[0], ("Google", 5))
         self.assertIn(("Bing", 1), report.referrers)
         self.assertIn(("Navegación interna", 1), report.referrers)
@@ -65,6 +69,38 @@ class DailyAnalyticsReportTests(unittest.TestCase):
         self.assertIn("Visitas: 3", plain)
         self.assertIn("DuckDuckGo: 3", plain)
         self.assertIn("ES: 4", plain)
+
+    def test_country_groups_are_a_fallback_when_total_is_empty(self):
+        data = {
+            "total": [],
+            "countries": [
+                {"count": 3, "sum": {"visits": 2}, "dimensions": {"countryName": "ES"}},
+                {"count": 1, "sum": {"visits": 1}, "dimensions": {"countryName": "DE"}},
+            ],
+            "referrers": [],
+            "paths": [],
+        }
+
+        report = MODULE.build_report(date(2026, 11, 7), data)
+
+        self.assertEqual(report.pageviews, 4)
+        self.assertEqual(report.visits, 3)
+
+    def test_email_mentions_cloudflare_sampling_when_present(self):
+        report = MODULE.AnalyticsReport(
+            day=date(2026, 11, 7),
+            pageviews=4,
+            visits=3,
+            countries=[("ES", 4)],
+            referrers=[],
+            paths=[("/", 4)],
+            sample_interval=2,
+        )
+
+        message = MODULE.make_message(report, "sender@example.com", "recipient@example.com")
+        plain = message.get_body(preferencelist=("plain",)).get_content()
+
+        self.assertIn("Intervalo de mostraxe indicado por Cloudflare: 2.", plain)
 
 
 if __name__ == "__main__":

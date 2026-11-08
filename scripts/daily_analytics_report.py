@@ -33,7 +33,8 @@ query DailyWebAnalytics(
   viewer {
     accounts(filter: { accountTag: $accountTag }) {
       total: rumPageloadEventsAdaptiveGroups(
-        limit: 1
+        limit: 10
+        orderBy: [date_ASC]
         filter: {
           siteTag: $siteTag
           datetime_geq: $start
@@ -41,6 +42,8 @@ query DailyWebAnalytics(
         }
       ) {
         count
+        avg { sampleInterval }
+        dimensions { date }
         sum { visits }
       }
       countries: rumPageloadEventsAdaptiveGroups(
@@ -53,6 +56,7 @@ query DailyWebAnalytics(
         }
       ) {
         count
+        sum { visits }
         dimensions { countryName }
       }
       referrers: rumPageloadEventsAdaptiveGroups(
@@ -100,6 +104,7 @@ class AnalyticsReport:
     countries: list[tuple[str, int]]
     referrers: list[tuple[str, int]]
     paths: list[tuple[str, int]]
+    sample_interval: float = 1.0
 
 
 def required_env(name: str) -> str:
@@ -176,6 +181,13 @@ def safe_count(value: Any) -> int:
         return 0
 
 
+def safe_number(value: Any, default: float = 1.0) -> float:
+    try:
+        return max(0.0, float(value))
+    except (TypeError, ValueError):
+        return default
+
+
 def grouped(rows: Iterable[dict[str, Any]], dimension: str, empty_label: str) -> list[tuple[str, int]]:
     values: Counter[str] = Counter()
     for row in rows:
@@ -206,9 +218,20 @@ def referrer_label(host: str) -> str:
 
 def build_report(day: date, data: dict[str, Any]) -> AnalyticsReport:
     total_rows = data.get("total") or []
-    total = total_rows[0] if total_rows else {}
-    pageviews = safe_count(total.get("count"))
-    visits = safe_count(total.get("sum", {}).get("visits"))
+    pageviews = sum(safe_count(row.get("count")) for row in total_rows)
+    visits = sum(safe_count(row.get("sum", {}).get("visits")) for row in total_rows)
+    sample_interval = max(
+        (safe_number(row.get("avg", {}).get("sampleInterval")) for row in total_rows),
+        default=1.0,
+    )
+
+    # A consulta temporal debería fornecer o total. Se Cloudflare devolve ese
+    # grupo baleiro, reutilizamos os grupos por país, que parten do mesmo
+    # intervalo e evitan descartar visitas que si aparecen no panel.
+    if pageviews == 0:
+        country_rows = data.get("countries") or []
+        pageviews = sum(safe_count(row.get("count")) for row in country_rows)
+        visits = sum(safe_count(row.get("sum", {}).get("visits")) for row in country_rows)
 
     countries = grouped(data.get("countries") or [], "countryName", "País non dispoñible")
     raw_referrers = grouped(
@@ -228,7 +251,15 @@ def build_report(day: date, data: dict[str, Any]) -> AnalyticsReport:
         countries=countries,
         referrers=referrer_counts.most_common(),
         paths=paths,
+        sample_interval=sample_interval,
     )
+
+
+def sampling_note(report: AnalyticsReport) -> str:
+    if report.sample_interval <= 1:
+        return ""
+    value = f"{report.sample_interval:g}"
+    return f"Intervalo de mostraxe indicado por Cloudflare: {value}."
 
 
 def plain_rows(rows: list[tuple[str, int]], limit: int = 10) -> str:
@@ -271,6 +302,7 @@ Páxinas consultadas
 {plain_rows(report.paths)}
 
 Cloudflare Web Analytics conta accesos nos que se executa o seu código. Os bloqueadores e algúns navegadores poden facer que o total sexa inferior ó tráfico real.
+{sampling_note(report)}
 """
     )
     message.add_alternative(
@@ -283,6 +315,7 @@ Cloudflare Web Analytics conta accesos nos que se executa o seu código. Os bloq
 <h2 style="font-size:17px">Procedencias</h2>{html_rows(report.referrers)}
 <h2 style="font-size:17px">Páxinas consultadas</h2>{html_rows(report.paths)}
 <p style="font-size:12px;color:#555">Cloudflare Web Analytics conta accesos nos que se executa o seu código. Os bloqueadores e algúns navegadores poden facer que o total sexa inferior ó tráfico real.</p>
+{f'<p style="font-size:12px;color:#555">{html.escape(sampling_note(report))}</p>' if sampling_note(report) else ''}
 </body></html>""",
         subtype="html",
     )
