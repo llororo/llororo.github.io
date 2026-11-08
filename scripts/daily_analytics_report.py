@@ -20,7 +20,7 @@ from zoneinfo import ZoneInfo
 
 GRAPHQL_ENDPOINT = "https://api.cloudflare.com/client/v4/graphql"
 SITE_HOST = "llororo.github.io"
-SITE_TAG = "53008120a2c441dcbde2a0dc40a70abf"
+SITE_TAG = "eb6cc1c78109432080ec10b4ef71a104"
 LOCAL_TIMEZONE = ZoneInfo("Europe/Berlin")
 
 QUERY = r"""
