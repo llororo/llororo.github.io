@@ -1,0 +1,14 @@
+# Avisos coñecidos dunha web estática hospedada en GitHub Pages.
+# Mantéñense como información no informe; calquera regra nova conserva o nivel WARN.
+10015	INFO	(Caché de contido público e estático)
+10017	INFO	(Scripts externos de Cloudflare Analytics e Altmetric autorizados pola CSP)
+10020	INFO	(GitHub Pages non permite configurar a cabeceira anti-clickjacking)
+10021	INFO	(GitHub Pages non permite configurar X-Content-Type-Options)
+10049	INFO	(Contido público deseñado para ser almacenado na caché)
+10050	INFO	(Contido público recuperado da caché de GitHub Pages)
+10055	INFO	(frame-ancestors só funciona nunha cabeceira HTTP, non nunha CSP meta)
+10063	INFO	(GitHub Pages non permite configurar Permissions-Policy)
+10098	INFO	(CORS aberto unicamente para os ficheiros públicos da web)
+10109	INFO	(Detección informativa dunha aplicación web moderna)
+90003	INFO	(Scripts externos restrinxidos por dominio na CSP)
+90004	INFO	(GitHub Pages non permite configurar COEP ou COOP)
