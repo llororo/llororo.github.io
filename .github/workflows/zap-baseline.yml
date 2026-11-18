@@ -1,0 +1,27 @@
+name: Comprobar a web publicada con OWASP ZAP
+
+on:
+  schedule:
+    - cron: "17 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: zap-baseline
+  cancel-in-progress: true
+
+jobs:
+  zap-baseline:
+    name: Revisión pasiva da web
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Analizar a web publicada
+        uses: zaproxy/action-baseline@de8ad967d3548d44ef623df22cf95c3b0baf8b25 # v0.15.0
+        with:
+          target: "https://llororo.github.io/"
+          fail_action: true
+          allow_issue_writing: false
+          artifact_name: informe-zap
