@@ -1,6 +1,11 @@
 name: Comprobar a web publicada con OWASP ZAP
 
 on:
+  workflow_run:
+    workflows:
+      - pages-build-deployment
+    types:
+      - completed
   schedule:
     - cron: "17 7 * * 1"
   workflow_dispatch:
@@ -15,6 +20,7 @@ concurrency:
 jobs:
   zap-baseline:
     name: Revisión pasiva da web
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
