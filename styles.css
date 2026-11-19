@@ -896,6 +896,11 @@ cite {
   background: var(--black);
 }
 
+.outreach-card:nth-child(6) {
+  grid-column: 5 / -1;
+  transform: rotate(0.6deg);
+}
+
 [data-mode="calm"] .outreach-card:nth-child(1),
 [data-mode="calm"] .outreach-card:nth-child(3) {
   background: var(--white);
@@ -1465,7 +1470,11 @@ cite {
   }
 
   .outreach-card:nth-child(5) {
-    grid-column: 1 / -1;
+    grid-column: span 5;
+  }
+
+  .outreach-card:nth-child(6) {
+    grid-column: span 7;
   }
 
   .contact {
@@ -1606,7 +1615,8 @@ cite {
   .outreach-card:nth-child(2),
   .outreach-card:nth-child(3),
   .outreach-card:nth-child(4),
-  .outreach-card:nth-child(5) {
+  .outreach-card:nth-child(5),
+  .outreach-card:nth-child(6) {
     grid-column: 1 / -1;
     margin-top: 0;
     transform: none;
